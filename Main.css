@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,700);
+.font{
+  font-family: 'Fira Sans', sans-serif;
+  color: black;
+}
+
+body{
+  background: lightgrey;
+}
+.settings{
+  background: darkorange;
+  border-color: orange;
+}
+.button{
+  height: 100px;
+  width: 100px;
+}
+#red{
+  background-color: #7F1615;
+  border-color: #A93838;
+  color: black;
+}
+#green{
+  background-color: #357F20;
+  border-color: #57A243;
+  margin-right: .3em;
+}
+#yellow{
+  background-color: #BFA613;
+  border-color: #E1C832;
+  margin-right: .3em;
+}
+#blue{
+  background-color: #26467F;
+  border-color: #3E5B90;
+}
+#bottom-row{
+  margin-top: .3em;
+}

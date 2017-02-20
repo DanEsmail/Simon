@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title> A Game Of Simon</title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="Main.css">
+  </head>
+  <body>
+    <div class="container">
+    <div class="col-sm-2">
+      </div>
+      <div class="col-sm-8">
+        <h1 id=title class="font">Simon</h1>
+        <br>
+
+
+    <div>
+      <button id="green" class="button font"><b> Green</b></button>
+      <button id="red" class="button font"> <b>Red</b></button>
+    </div>
+    <div id="bottom-row">
+      <button id="yellow" class="button font"><b>Yellow</b></button>
+      <button id="blue" class="button font"><b> Blue</b></button>
+    </div>
+        <br>
+
+    <div id="buttons">
+      <button id="play" class="settings font">Play</button>
+      <button id="clear" class="settings font"> clear</button>
+      <button id="change-game" class="settings font">Strict</button>
+      <p id="game-counter" class="font"><b>Counter: 0</b></p>
+      <p id="game-mode" class="font"><b>Game Mode: Off</b></p>
+      <audio id="green-sound">
+        <source src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" type="audio/mpeg">
+      </audio>
+      <audio  id="red-sound">
+        <source src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" type="audio/mpeg">
+      </audio>
+      <audio  id="blue-sound">
+        <source src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" type="audio/mpeg">
+      </audio>
+      <audio  id="yellow-sound">
+        <source src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" type="audio/mpeg">
+      </audio>
+        </div>
+        <div="col-sm-2">
+        </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+      <script src="app.js"></script>
+  </body>
+</html>
