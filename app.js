@@ -172,11 +172,13 @@ $("#change-game").click(function() {
     restart()
     gameState = 2;
     $("#game-mode").html("Game Mode: Strict");
+    $("#change-game").html("Normal")
   } else {
     clearBoard();
     gameState = 1;
     restart();
     $("#game-mode").html("Game Mode: Normal");
+    $("#change-game").html("Strict")
   }
 })
 

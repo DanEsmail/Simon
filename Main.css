@@ -1,19 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,700);
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
 .font{
   font-family: 'Fira Sans', sans-serif;
   color: black;
 }
 
 body{
-  background: lightgrey;
+  background: black;
+  text-align: center;
 }
 .settings{
-  background: darkorange;
-  border-color: orange;
+  background: #025E6F;
+  border-color: #014B59;
+  margin: 5px;
+  color: #22C145 !important;
 }
 .button{
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 #red{
   background-color: #7F1615;
@@ -35,5 +42,24 @@ body{
   border-color: #3E5B90;
 }
 #bottom-row{
-  margin-top: .3em;
+  margin-top: 15px;
+}
+
+.button-row{
+  margin-top: 10px;
+}
+
+.score-box{
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+#game-box{
+  background-color: black;
+  height: 100%;
+}
+
+.digital-font{
+  font-family: "Orbitron", sans-serif;
+  color: #00AF27;
 }
