@@ -1,208 +1,170 @@
-// game state 0 = off / 1 = normal / 2= strict
-var gameState = 0;
-// coumpters turn = 0 / players turn = 1
-var turn = 0;
-// gives the player the count of simmon
-var gameCount = 0;
-// tells the computer what number of the array its on
-var currentNum = 0;
-var simmonArr = [];
 var redSound = document.getElementById("red-sound");
 var greenSound = document.getElementById("green-sound");
 var blueSound = document.getElementById("blue-sound");
 var yellowSound = document.getElementById("yellow-sound");
-var winnerCount = 0;
+var wrong = document.getElementById("wrong");
+wrong.volume = 0.4;
 
+var simonArr = [];
 
+var counter = 0
 
+var gameMode = 0
 
-function winner() {
-  $("#game-mode").html("Game Mode: WINNER!")
+var turn = 0
 
-  var winnerBreak = setInterval(function() {
-    if (winnerCount >= 10) {
-      clearInterval(winnerBreak);
-      $("#game-mode").html("Game Mode: Normal")
-      setTimeout(function(){
-      clearBoard();
-      restart();
-      winnerCount = 0;
-      },200)
-
-    } else {
-      $("#green").css("background-color", "#69FF41");
-      $("#red").css("background-color", "#FF2D2A");
-      $("#blue").css("background-color", "#4C8CFF");
-      $("#yellow").css("background-color", "#FFDD1A");
-
-      setTimeout(function() {
-        $("#green").css("background-color", "#357F20");
-        $("#red").css("background-color", "#7F1615");
-        $("#blue").css("background-color", "#26467F")
-        $("#yellow").css("background-color", "#BFA613");
-
-      }, 300)
-      winnerCount += 1
-      console.log(winnerCount)
-    }
-  }, 500);
-
+function clearBoard(){
+  simonArr = [];
+  counter = 0;
+  $("#game-counter").html("counter: 0")
 }
 
-function clearBoard() {
-  gameCount = 0;
-  simmonArr = [];
-  currentNum = 0;
-  $("#game-counter").html("Counter: " + currentNum);
-}
-
-function restart() {
-  simmonRandom();
-  playBack();
-}
-
-function simmonRandom() {
-  currentNum += 1;
-  $("#game-counter").html("Counter: " + currentNum)
-  simmonArr.push(Math.ceil(Math.random() * 4))
-  console.log(simmonArr);
-
-}
-
-function simmonFlash(num) {
-  switch (num) {
+function flash(str){
+  switch(str){
+    case "green":
     case 1:
       greenSound.play();
       $("#green").css("background-color", "#69FF41");
       setTimeout(function() {
-        $("#green").css("background-color", "#357F20");
-
+      $("#green").css("background-color", "#357F20");
       }, 500)
       break;
+    case "red":
     case 2:
       redSound.play();
       $("#red").css("background-color", "#FF2D2A")
       setTimeout(function() {
         $("#red").css("background-color", "#7F1615");
-
       }, 500)
       break;
       break;
+    case "blue":
     case 3:
       blueSound.play();
       $("#blue").css("background-color", "#4C8CFF")
       setTimeout(function() {
         $("#blue").css("background-color", "#26467F");
-
-
       }, 500)
       break;
+    case "yellow":
     case 4:
       yellowSound.play();
       $("#yellow").css("background-color", "#FFDD1A");
       setTimeout(function() {
         $("#yellow").css("background-color", "#BFA613");
-
       }, 500)
       break;
   }
-
 }
 
-function playBack() {
-  if(currentNum >= 20) {
-    winner()
-  } else {
-
-    var breakout = setInterval(function() {
-      if (gameCount >= simmonArr.length - 1) {
-        clearInterval(breakout);
-        turn = 1;
-        setTimeout(function() {
-          gameCount = 0;
-        }, 200)
-
-      }
-      simmonFlash(simmonArr[gameCount]);
-      gameCount += 1;
-    }, 750)
-  }
+function wrongFlash(){
+  $("#green").css("background-color", "#FF2D2A")
+  $("#yellow").css("background-color", "#FF2D2A")
+  $("#blue").css("background-color", "#FF2D2A")
+  $("#red").css("background-color", "#FF2D2A")
+  setTimeout(function(){
+    $("#green").css("background-color", "#357F20");
+    $("#red").css("background-color", "#7F1615");
+    $("#blue").css("background-color", "#26467F");
+    $("#yellow").css("background-color", "#BFA613");
+  },500)
 }
 
-function playerInput(num) {
-    simmonFlash(num)
-    if (num == simmonArr[gameCount]) {
-
-      gameCount += 1;
-      console.log(gameCount)
-      if (gameCount >= simmonArr.length) {
-        turn = 0;
-        gameCount = 0;
-        simmonRandom();
-        playBack();
-      }
-    } else if (gameState == 1) {
-      turn = 0;
-      gameCount = 0;
-      playBack();
-    } else {
-      clearBoard();
-      restart();
+function playBack(){
+  var count = 0;
+  var breakout = setInterval(function(){
+    if(count == simonArr.length){
+      clearInterval(breakout)
+      turn = 0
+    }else{
+      flash(simonArr[count])
+      count++;
     }
+  },600)
+}
+
+function add(){
+  var num = (Math.ceil(Math.random()* 4));
+  switch (num) {
+    case 1:
+      simonArr.push("green")
+      break;
+    case 2:
+      simonArr.push("red")
+      break;
+    case 3:
+      simonArr.push("blue")
+      break;
+    case 4:
+      simonArr.push("yellow")
+      break;
+    default:
   }
+}
 
+function input(num){
+  if(num == simonArr[counter]){
+    flash(num);
+    counter++
+    if(counter == simonArr.length){
+      $("#game-counter").html("Counter: "+ (counter+ 1))
+      counter = 0;
+      computerTurn();
+    }
+  }else{
+    if(gameMode == 1){
+      wrong.play()
+      wrongFlash();
+      turn = 1
+      playBack();
+      counter = 0
+    }else{
+      wrong.play();
+      wrongFlash();
+      clearBoard();
+      computerTurn();
 
-$("#play").click(function() {
+    }
 
-  if (gameState == 0) {
-    restart();
-    gameState = 1;
-    $("#game-mode").html("Game Mode: Normal");
   }
-})
+}
 
-$("#clear").click(function() {
-  clearBoard();
-  restart();
-})
+function computerTurn(){
+  turn = 1
+  add()
+  playBack()
+}
 
-$("#change-game").click(function() {
-  if (gameState == 1 || gameState == 0) {
+
+$(document).ready(function(){
+    $(".simon-button").on("click", function(){
+      if(turn == 0){
+        input($(this).attr("id"))
+      }else{
+      }
+    })
+
+  $("#clear").on("click", function(){
     clearBoard();
-    restart()
-    gameState = 2;
-    $("#game-mode").html("Game Mode: Strict");
-    $("#change-game").html("Normal")
-  } else {
-    clearBoard();
-    gameState = 1;
-    restart();
-    $("#game-mode").html("Game Mode: Normal");
-    $("#change-game").html("Strict")
-  }
-})
+  })
 
-$("#red").click(function() {
+  $("#play").on("click", function(){
+    computerTurn()
+  })
 
-  if (turn == 1) {
-    playerInput(2);
-  }
-
-})
-
-$("#blue").click(function() {
-  if (turn == 1) {
-    playerInput(3);
-  }
-})
-$("#yellow").click(function() {
-  if (turn == 1) {
-    playerInput(4);
-  }
-
-})
-$("#green").click(function() {
-  if (turn == 1) {
-    playerInput(1);
-  }
+  $("#change-game").on("click", function(){
+    if(gameMode == 0 || gameMode == 1){
+      gameMode = 2
+      $("#game-mode").html("Game Mode: Strict")
+      $("#change-game").html("Normal")
+      clearBoard()
+      computerTurn()
+    }else{
+      gameMode = 1
+      $("#game-mode").html("Game Mode: Normal")
+      $("#change-game").html("Strict")
+      clearBoard()
+      computerTurn()
+    }
+  })
 })

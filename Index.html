@@ -17,19 +17,19 @@
           <h1 class="digital-font">A Game of Simon</h1>
           <br>
           <div class="button-row" id="button">
-            <button id="play" class="settings digital-font">Play</button>
-            <button id="clear" class="settings digital-font"> clear</button>
-            <button id="change-game" class="settings digital-font">Strict</button>
+            <button id="play" class="settings btn digital-font">Play</button>
+            <button id="clear" class="settings btn digital-font"> clear</button>
+            <button id="change-game" class="settings btn digital-font">Strict</button>
 
           </div>
           <br>
             <div>
-              <button id="green" class="button font"><b> Green</b></button>
-              <button id="red" class="button font"> <b>Red</b></button>
+              <button id="green" class="simon-button font"><b> Green</b></button>
+              <button id="red" class="simon-button font"> <b>Red</b></button>
             </div>
             <div id="bottom-row">
-              <button id="yellow" class="button font"><b>Yellow</b></button>
-              <button id="blue" class="button font"><b> Blue</b></button>
+              <button id="yellow" class="simon-button font"><b>Yellow</b></button>
+              <button id="blue" class="simon-button font"><b> Blue</b></button>
             </div>
 
           <div class="score-box">
@@ -54,10 +54,14 @@
       <audio  id="yellow-sound">
         <source src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" type="audio/mpeg">
       </audio>
+      <audio  id="wrong">
+      <source src="./Wrong.wav" type="audio/wav">
+
+      </audio>
         <div="col-sm-2">
         </div>
       </div>
       <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-      <script src="app.js"></script>
+      <script src="newapp.js"></script>
   </body>
 </html>
